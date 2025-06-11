@@ -1,0 +1,50 @@
+ <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-info bg-dark">
+        <div class="container">
+            {% if user.is_authenticated %}
+            <a class="navbar-brand text-white" href="{% url 'dashboard-index'%} ">Компьютерный центр</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" href="{% url 'dashboard-index'%}">Панель мониторинга <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" href="{% url 'user-profile' %}">Профиль {{ user.username }} <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                     <form action="{% url 'user-logout' %}" method="post" class="d-inline">
+                         {% csrf_token %}
+                         <button type="submit" class="btn btn-outline-danger ms-2">
+                              <i class="fa-solid fa-arrow-right-from-bracket"></i> Выход
+                         </button>
+                    </form>
+                    </li>
+                </ul>
+                {% else %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" href="{% url 'user-register'%}">Регистрация <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                       <form action="{% url 'user-login' %}" method="post" class="d-inline">
+                         {% csrf_token %}
+                         <button type="submit" class="btn btn-outline-danger ms-2"> >
+                              <i class="fa-solid fa-arrow-right-from-bracket"> </i>Войти</button>
+                        </form>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <!--End Navbar-->

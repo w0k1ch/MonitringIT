@@ -1,0 +1,80 @@
+{% extends 'partials/base.html' %}
+{% block title %}Редактирование задачи{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row min-vh-100 justify-content-center align-items-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card border-0 shadow-lg rounded-3 animate__animated animate__fadeInUp">
+                <div class="card-body p-5">
+                    <!-- Заголовок -->
+                    <div class="text-center mb-5">
+                        <i class="fas fa-edit fa-3x text-danger mb-4"></i>
+                        <h2 class="h3 font-weight-bold mb-0">Редактирование задачи</h2>
+                        <p class="text-muted">Внесите необходимые изменения</p>
+                    </div>
+
+                    <!-- Форма редактирования -->
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <!-- Поля формы -->
+                        <div class="mb-4">
+                            {{ form|crispy }}
+                        </div>
+
+                        <!-- Кнопки -->
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                            <a href="{% url 'dashboard-tasks' %}" class="btn btn-secondary btn-lg rounded-pill px-4">
+                                <i class="fas fa-arrow-left me-2"></i>Назад
+                            </a>
+                            <button type="submit" class="btn btn-danger btn-lg rounded-pill px-4">
+                                <i class="fas fa-save me-2"></i>Сохранить
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Стили -->
+<style>
+    .card {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        transition: transform 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .btn-danger {
+        border: none;
+        transition: all 0.3s;
+    }
+
+    .btn-danger:hover {
+        transform: scale(1.02);
+        box-shadow: 0 5px 15px rgba(13, 110, 253, 0.4);
+    }
+
+    .form-control {
+        border-radius: 8px;
+        transition: all 0.3s;
+    }
+
+    .form-control:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+    }
+</style>
+
+<!-- Подключение библиотек -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+{% endblock %}
